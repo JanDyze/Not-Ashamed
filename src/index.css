@@ -1,13 +1,45 @@
 @import "tailwindcss";
 
+@theme {
+  /* Core colors */
+  --color-primary: #5c5449; /* Updated to user-specified primary */
+  --color-primary-foreground: #f9f1e8; /* Updated to user-specified contrast */
+  --color-secondary: #6b7280; /* Gray */
+  --color-secondary-foreground: #ffffff;
+  --color-accent: #10b981; /* Emerald */
+  --color-accent-foreground: #ffffff;
+  --color-warn: #f59e0b; /* Amber */
+  --color-warn-foreground: #ffffff;
+  --color-success: #22c55e; /* Green */
+  --color-success-foreground: #ffffff;
+  --color-error: #ef4444; /* Red */
+  --color-error-foreground: #ffffff;
+  --color-neutral: #6b7280; /* Neutral gray */
+  --color-neutral-foreground: #ffffff;
+
+  /* Surface levels */
+  --color-surface: #ffffff; /* Base surface (light mode) */
+  --color-surface-1: #f8fafc; /* Slightly elevated */
+  --color-surface-2: #f1f5f9; /* Card-like */
+  --color-surface-3: #e2e8f0; /* More elevated */
+  --color-foreground: #1f2937; /* Text color for light mode */
+
+  /* Dark mode surfaces */
+  --color-surface-dark: #1f2937;
+  --color-surface-dark-1: #374151;
+  --color-surface-dark-2: #4b5563;
+  --color-surface-dark-3: #6b7280;
+  --color-foreground-dark: #d1d5db;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--color-foreground);
+  background-color: var(--color-surface);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,13 +47,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: var(--color-foreground-dark);
+    background-color: var(--color-surface-dark);
+  }
+}
+
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--color-primary);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: color-mix(in srgb, var(--color-primary) 80%, #000000);
 }
 
 body {
@@ -44,12 +83,14 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-surface-dark-1);
+  color: var(--color-foreground-dark);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, background-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-primary);
+  background-color: color-mix(in srgb, var(--color-surface-dark-1) 80%, #ffffff);
 }
 button:focus,
 button:focus-visible {
@@ -57,14 +98,11 @@ button:focus-visible {
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
   button {
-    background-color: #f9f9f9;
+    background-color: var(--color-surface-1);
+    color: var(--color-foreground);
+  }
+  button:hover {
+    background-color: color-mix(in srgb, var(--color-surface-1) 80%, #000000);
   }
 }
